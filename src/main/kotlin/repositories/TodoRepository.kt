@@ -34,7 +34,7 @@ class TodoRepository(private val baseUrl: String) : ITodoRepository {
 
         val total = query.count().toInt()
         val offset = ((page - 1) * perPage).toLong()
-        val items = query.limit(perPage, offset = offset)
+        val items = query.limit(perPage).offset(offset)
             .map { todoDAOToModel(it, baseUrl) }
 
         Pair(items, total)
